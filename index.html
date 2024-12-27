@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Trending Topics</title>
+    <script>
+        async function fetchTrends() {
+            const response = await fetch('http://127.0.0.1:5000/run-selenium', { method: 'POST' });
+            console.log(response)
+            const data = await response.json();
+            document.getElementById("results").innerHTML = `
+                <h3>Trending Topics</h3>
+                <ul>
+                    <li>1. ${data.trend1}</li>
+                    <li>2. ${data.trend2}</li>
+                    <li>3. ${data.trend3}</li>
+                    <li>4. ${data.trend4}</li>
+                    <li>5. ${data.trend5}</li>
+                </ul>
+                <p>Unique ID: ${data.unique_id}</p>
+                <p>Date & Time: ${data.date_time}</p>
+                <p>IP Address: ${data.ip_address}</p>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <h1>Twitter Trending Topics</h1>
+    <button onclick="fetchTrends()">Fetch Trends</button>
+    <div id="results"></div>
+</body>
+</html>
